@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SeriesController;
+use Faker\Guesser\Name;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/series');
 });
+//criando groupo de rotas
+Route::controller(SeriesController::class)->group(function (){
+Route::get('/series','index')->name('series.index');
+Route::get('/series/criar','create')->name('series.create');
+Route::post('/series/salvar','store')->name('series.store');
 
-Route::get('/series',[SeriesController::class,'index']);
-Route::get('/series/criar',[SeriesController::class,'create']);
-Route::post('/series/salvar',[SeriesController::class,'store']);
-
+});
