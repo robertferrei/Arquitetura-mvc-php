@@ -9,7 +9,6 @@ class SeriesController extends Controller
 {
     public function index(){
 
-
         $series = Series::query()->orderBy('nome') ->get();        
         return view('series.index',['series'=>$series]);
     }
@@ -25,6 +24,10 @@ class SeriesController extends Controller
         to_route('series.index');
         return redirect('/series');
 
+    }
+    public function destroy($id){
+        Series::where('id',$id) ->delete();
+        return redirect()->route('series.index');
     }
 }
 
